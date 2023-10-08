@@ -13,7 +13,10 @@
         android:theme="@style/Theme.Unidadll"
         tools:targetApi="31">
         <activity
-            android:name=".Ejemplos.EjemploFragments"
+            android:name=".Practicas.P1_Login.HomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Practicas.P1_Login.LoginActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +24,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".Ejemplos.Ejemplo2.ArchPrefs2"
+            android:exported="false" />
+        <activity
+            android:name=".Ejemplos.Ejemplo2.EjemploArchPrefs"
+            android:exported="false"></activity>
+        <activity
+            android:name=".Ejemplos.Ejemplo1.EjemploFragments"
+            android:exported="false" />
     </application>
 
 </manifest>
