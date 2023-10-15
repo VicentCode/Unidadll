@@ -8,4 +8,6 @@
     <string name="createAccount">Crear cuenta nueva</string>
     <string name="register">Crear Cuenta</string>
     <string name="confirmPass">Confirmar contraseña</string>
+    <string name="Cousers">Materias</string>
+    <string name="update_edit">Editar</string>
 </resources>
