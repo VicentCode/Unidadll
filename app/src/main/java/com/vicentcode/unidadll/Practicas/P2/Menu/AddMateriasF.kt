@@ -2,7 +2,6 @@ package com.vicentcode.unidadll.Practicas.P2.Menu
 
 import Materia
 import Unidad
-import actualizarMateria
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,12 +9,26 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.vicentcode.unidadll.databinding.FragmentAddMateriasBinding
+import guardarCalif
 import guardarMateria
-import materiaExiste
+import obtenerCalif
+import obtenerMateriasALL
 
 class AddMateriasF : Fragment() {
 
     private lateinit var v: FragmentAddMateriasBinding
+    var miVariable = ""
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        // Recuperar los argumentos del fragmento
+        val arguments = arguments
+
+        if (arguments != null) {
+            miVariable = arguments.getString("mat", "ERROR 404")
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,13 +38,23 @@ class AddMateriasF : Fragment() {
 
         v.guardar.setOnClickListener {
             if (verifyInputs()){
-                //create or update materia
-                CreateMateria()
-                } else {
+                val materia = v.matNameED.text.toString()
+                if (obtenerMateriasALL(requireContext()).contains(materia)) {
+                    CreateMateria()
+                    Toast.makeText(requireContext(), "$materia actualizada con exito", Toast.LENGTH_SHORT).show()
+                }else{
+                    CreateMateria()
+                    Toast.makeText(requireContext(), "$materia creada y guardada con exito", Toast.LENGTH_SHORT).show()
+                }
 
                 }
             }
 
+        v.matNameED.setText(miVariable)
+        v.U1ED.setText(obtenerCalif(requireContext(), miVariable, "1"))
+        v.U2ED.setText(obtenerCalif(requireContext(), miVariable, "2"))
+        v.U3ED.setText(obtenerCalif(requireContext(), miVariable, "3"))
+        v.u4ED.setText(obtenerCalif(requireContext(), miVariable, "4"))
 
 
         return v.root
@@ -80,49 +103,14 @@ class AddMateriasF : Fragment() {
     fun CreateMateria()
     {
         val materiaNameED = v.matNameED.text.toString()
-        val unidad1 = v.U1ED.text.toString().toInt()
-        val unidad2 = v.U2ED.text.toString().toInt()
-        val unidad3 = v.U3ED.text.toString().toInt()
-        val unidad4 = v.u4ED.text.toString().toInt()
+        val unidad1 = v.U1ED.text.toString()
+        val unidad2 = v.U2ED.text.toString()
+        val unidad3 = v.U3ED.text.toString()
+        val unidad4 = v.u4ED.text.toString()
+        guardarMateria(requireContext(), materiaNameED)
+        guardarCalif(requireContext(), materiaNameED, unidad1,unidad2, unidad3, unidad4)
 
-        if (!materiaExiste(requireContext(), materiaNameED)) {
-            // Crear una instancia de Materia con un nombre y calificaciones para las unidades
-            val materia = Materia(nombre = "ingles")
-            materia.unidades.add(Unidad(calificacion = 85))
-            materia.unidades.add(Unidad(calificacion = 90))
-            materia.unidades.add(Unidad(calificacion = 78))
-            materia.unidades.add(Unidad(calificacion = 92))
 
-// Llamar a la función guardarMateria para guardar la materia
-            guardarMateria(requireContext(), materia)
-
-            ClearInputs()
-            Toast.makeText(requireContext(), "Materia: $materiaNameED creada con exito", Toast.LENGTH_SHORT).show()
-        }else{
-            var materia = Materia( nombre = materiaNameED)
-            materia.unidades.add(Unidad())
-            materia.unidades.add(Unidad())
-            materia.unidades.add(Unidad())
-            materia.unidades.add(Unidad())
-            materia.unidades[0].calificacion = unidad1
-            materia.unidades[1].calificacion = unidad2
-            materia.unidades[2].calificacion = unidad3
-            materia.unidades[3].calificacion = unidad4
-
-            guardarMateria(requireContext(), materia)
-            // Supongamos que tienes una materia con ID 1 que deseas actualizar
-            val materiaAActualizar = Materia( nombre = materiaNameED)
-
-// Crea una nueva instancia de Materia con la información actualizada
-            val nuevaInformacionMateria = Materia( nombre = materiaNameED)
-
-// Llama a la función para actualizar la materia
-            actualizarMateria(requireContext(), nuevaInformacionMateria)
-            Toast.makeText(requireContext(), "Materia: $materiaNameED actualizada con exito", Toast.LENGTH_SHORT).show()
-
-// La materia con ID 1 se actualizará con la nueva información en SharedPreferences
-
-        }
     }
 
     fun ClearInputs(){
