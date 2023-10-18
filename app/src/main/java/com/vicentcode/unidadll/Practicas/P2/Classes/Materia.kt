@@ -44,6 +44,20 @@ fun obtenerMateriasALL(context: Context): List<Any> {
     return valuesList
 }
 
+fun deleteMateria(context: Context, materia: String){
+    val sharedPreferences = context.getSharedPreferences("Materias", Context.MODE_PRIVATE)
+    val sharedPreferencesCalif = context.getSharedPreferences("Calificaciones", Context.MODE_PRIVATE)
+    val editor = sharedPreferences.edit()
+    val editorCalif = sharedPreferencesCalif.edit()
+    editor.remove(materia)
+    editorCalif.remove("$materia:u1")
+    editorCalif.remove("$materia:u2")
+    editorCalif.remove("$materia:u3")
+    editorCalif.remove("$materia:u4")
+    editor.apply()
+    editorCalif.apply()
+}
+
 fun deleteAll(context: Context){
     val sharedPreferences = context.getSharedPreferences("Materias", Context.MODE_PRIVATE)
     val sharedPreferencesCalif = context.getSharedPreferences("Calificaciones", Context.MODE_PRIVATE)

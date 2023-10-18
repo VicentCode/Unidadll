@@ -19,7 +19,10 @@ import kotlinx.coroutines.delay
 import obtenerCalif
 import obtenerMateriasALL
 
-class Home : AppCompatActivity() {
+class Home : AppCompatActivity(), AddMateriasF.OnSpinnerUpdateListener {
+
+
+
     lateinit var v: ActivityHomeFBinding
     private var materias: String? = null
 
@@ -28,7 +31,7 @@ class Home : AppCompatActivity() {
         v = ActivityHomeFBinding.inflate(layoutInflater)
         setContentView(v.root)
 
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, obtenerMateriasALL(this))
+        val adapter = ArrayAdapter(this, R.layout.spinner_text_p, obtenerMateriasALL(this))
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         v.spinner.adapter = adapter
 
@@ -36,7 +39,6 @@ class Home : AppCompatActivity() {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
 
                 materias = v.spinner.selectedItem.toString()
-                // obtenerMateriasALL(this@Home)[position].toString()
                 if (obtenerMateriasALL(this@Home).size == 0){
                     loadFragment(AddMateriasF(), true, null, null)
                     Toast.makeText(this@Home, "Agrega una materia", Toast.LENGTH_SHORT).show()
@@ -79,5 +81,17 @@ class Home : AppCompatActivity() {
 
         fragmentTransaction.commit()
     }
+
+
+
+
+    override fun updateSpinnerData(newData: List<Any>) {
+        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, newData)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        v.spinner.adapter = adapter
+    }
+
+
+
 
 }

@@ -1,7 +1,6 @@
 package com.vicentcode.unidadll.Practicas.P2.Menu
 
-import Materia
-import Unidad
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.vicentcode.unidadll.databinding.FragmentAddMateriasBinding
+import deleteMateria
 import guardarCalif
 import guardarMateria
 import obtenerCalif
@@ -18,6 +18,7 @@ class AddMateriasF : Fragment() {
 
     private lateinit var v: FragmentAddMateriasBinding
     var miVariable = ""
+    private var listener: OnSpinnerUpdateListener? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,8 +48,27 @@ class AddMateriasF : Fragment() {
                     Toast.makeText(requireContext(), "$materia creada y guardada con exito", Toast.LENGTH_SHORT).show()
                 }
 
+                listener?.updateSpinnerData(obtenerMateriasALL(requireContext()))
+
                 }
             }
+
+        v.eliminar.setOnClickListener {
+            if (v.matNameED.text.toString().isEmpty()){
+                Toast.makeText(requireContext(), "Ingrese un nombre de materia", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }else{
+                deleteMateria(requireContext(), miVariable)
+                Toast.makeText(requireContext(), "Materia eliminada con exito", Toast.LENGTH_SHORT).show()
+                listener?.updateSpinnerData(obtenerMateriasALL(requireContext()))
+
+            }
+
+        }
+
+        v.clear.setOnClickListener {
+            ClearInputs()
+        }
 
         v.matNameED.setText(miVariable)
         v.U1ED.setText(obtenerCalif(requireContext(), miVariable, "1"))
@@ -100,6 +120,16 @@ class AddMateriasF : Fragment() {
         return band
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (context is OnSpinnerUpdateListener) {
+            listener = context
+        } else {
+            throw RuntimeException("$context debe implementar OnSpinnerUpdateListener")
+        }
+    }
+
+
     fun CreateMateria()
     {
         val materiaNameED = v.matNameED.text.toString()
@@ -110,8 +140,12 @@ class AddMateriasF : Fragment() {
         guardarMateria(requireContext(), materiaNameED)
         guardarCalif(requireContext(), materiaNameED, unidad1,unidad2, unidad3, unidad4)
 
-
     }
+
+    interface OnSpinnerUpdateListener {
+        fun updateSpinnerData(newData: List<Any>)
+    }
+
 
     fun ClearInputs(){
         v.matNameED.text?.clear()
