@@ -2,4 +2,12 @@
     <string name="app_name">Unidadll</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="username">Nombre de usuario</string>
+    <string name="pass">Contraseña</string>
+    <string name="login">Inciar Sesión</string>
+    <string name="createAccount">Crear cuenta nueva</string>
+    <string name="register">Crear Cuenta</string>
+    <string name="confirmPass">Confirmar contraseña</string>
+    <string name="Cousers">Materias:</string>
+    <string name="update_edit">Editar</string>
 </resources>

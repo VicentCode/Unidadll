@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Practicas.P2.Menu.AddMateriasF">
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/matNameL"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/matNameED"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre de la materia"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/U1L"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="80dp"
+        app:layout_constraintEnd_toEndOf="@+id/matNameL"
+        app:layout_constraintStart_toStartOf="@+id/matNameL"
+        app:layout_constraintTop_toBottomOf="@+id/matNameL">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/U1ED"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Unidad 1"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/U2L"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/U1L"
+        app:layout_constraintStart_toStartOf="@+id/U1L"
+        app:layout_constraintTop_toBottomOf="@+id/U1L">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/U2ED"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Unidad 2" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/u3L"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/U2L"
+        app:layout_constraintStart_toStartOf="@+id/U2L"
+        app:layout_constraintTop_toBottomOf="@+id/U2L">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/U3ED"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Unidad 3" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/U4l"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/u3L"
+        app:layout_constraintStart_toStartOf="@+id/u3L"
+        app:layout_constraintTop_toBottomOf="@+id/u3L">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/u4ED"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:hint="Unidad 4" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/guardar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="Guardar"
+        app:layout_constraintEnd_toStartOf="@+id/guideline5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/U4l" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.50121653" />
+
+    <Button
+        android:id="@+id/eliminar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="Eliminar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/guideline5"
+        app:layout_constraintTop_toBottomOf="@+id/U4l" />
+
+    <Button
+        android:id="@+id/clear"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="32dp"
+        android:text="Limpiar"
+        app:layout_constraintEnd_toEndOf="@+id/eliminar"
+        app:layout_constraintStart_toStartOf="@+id/guardar"
+        app:layout_constraintTop_toBottomOf="@+id/guardar" />
+</androidx.constraintlayout.widget.ConstraintLayout>

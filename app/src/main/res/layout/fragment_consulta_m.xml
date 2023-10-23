@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Practicas.P2.Menu.FragmentConsultaM">
+
+    <TextView
+        android:id="@+id/MatName"
+        style="@style/TextAppearance.Material3.TitleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/inter_semibold"
+        tools:text="MateriaName"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/U1"
+        style="@style/TextAppearance.Material3.TitleMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:fontFamily="@font/inter_bold"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/MatName"
+        app:layout_constraintTop_toBottomOf="@+id/MatName"
+        android:text="Unidad 1" />
+
+    <TextView
+        android:id="@+id/CalU1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        tools:text="99"
+        android:fontFamily="@font/inter_semibold"
+        android:textSize="19sp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="@+id/U1"
+        app:layout_constraintStart_toEndOf="@+id/U1"
+        app:layout_constraintTop_toTopOf="@+id/U1" />
+
+    <TextView
+        android:id="@+id/U2"
+        style="@style/TextAppearance.Material3.TitleMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/inter_bold"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/MatName"
+        app:layout_constraintTop_toBottomOf="@+id/U1"
+        android:text="Unidad 2" />
+
+    <TextView
+        android:id="@+id/calU2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/inter_semibold"
+        android:textAlignment="center"
+        android:textSize="19sp"
+        app:layout_constraintBottom_toBottomOf="@+id/U2"
+        app:layout_constraintStart_toEndOf="@+id/U1"
+        app:layout_constraintTop_toTopOf="@+id/U2"
+        tools:text="99" />
+
+    <TextView
+        android:id="@+id/U3"
+        style="@style/TextAppearance.Material3.TitleMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/inter_bold"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/MatName"
+        app:layout_constraintTop_toBottomOf="@+id/U2"
+        android:text="Unidad 3" />
+
+    <TextView
+        android:id="@+id/calU3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/inter_semibold"
+        android:textAlignment="center"
+        android:textSize="19sp"
+        app:layout_constraintBottom_toBottomOf="@+id/U3"
+        app:layout_constraintStart_toEndOf="@+id/U1"
+        app:layout_constraintTop_toTopOf="@+id/U3"
+        tools:text="99" />
+
+    <TextView
+        android:id="@+id/U4"
+        style="@style/TextAppearance.Material3.TitleMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/inter_bold"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="@+id/MatName"
+        app:layout_constraintTop_toBottomOf="@+id/U3"
+        android:text="Unidad 4" />
+
+    <TextView
+        android:id="@+id/calU4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/inter_semibold"
+        android:textAlignment="center"
+        android:textSize="19sp"
+        app:layout_constraintBottom_toBottomOf="@+id/U4"
+        app:layout_constraintStart_toEndOf="@+id/U1"
+        app:layout_constraintTop_toTopOf="@+id/U4"
+        tools:text="99" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

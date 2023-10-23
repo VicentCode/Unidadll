@@ -2,8 +2,10 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Unidadll" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="Theme.Unidadll" parent="Base.Theme.Unidadll" />
+    <style name="Theme.Unidadll" parent="Base.Theme.Unidadll" >
+        <item name="colorPrimary">#6C3C80</item>
+        <item name="colorAccent">#D160AD</item>
+    </style>
 </resources>
