@@ -10,4 +10,8 @@
     <string name="confirmPass">Confirmar contraseña</string>
     <string name="Cousers">Materias:</string>
     <string name="update_edit">Editar</string>
+    <string name="title_activity_menu_fotos">MenuFotos</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
 </resources>
