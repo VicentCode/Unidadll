@@ -42,7 +42,7 @@ dependencies {
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation ("com.google.code.gson:gson:2.8.9") // O la versión más reciente de Gson
-
+    implementation ("com.squareup.picasso:picasso:2.8")
     implementation("com.google.android.material:material:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
     implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.6.1")

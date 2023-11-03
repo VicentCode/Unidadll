@@ -9,7 +9,6 @@ class Unidad(var calificacion: Int = 0)
 fun guardarMateria(context: Context, materia: String) {
     val sharedPreferences = context.getSharedPreferences("Materias", Context.MODE_PRIVATE)
     val editor = sharedPreferences.edit()
-
     editor.putString(materia, materia)
     editor.commit()
 }
