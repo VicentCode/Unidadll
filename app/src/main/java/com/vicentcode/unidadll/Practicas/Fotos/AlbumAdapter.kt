@@ -1,19 +1,14 @@
 package com.vicentcode.unidadll.Practicas.Fotos
 
-import android.content.ContentValues
-import android.database.sqlite.SQLiteDatabase
-import android.net.Uri
-import android.util.Log
+import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 import com.vicentcode.unidadll.R
-data class Album(val photoName: String, val albumName: String, val imageURI: String)
+data class Album(val photoName: String, val albumName: String, val imageURI: ByteArray)
 
 class AlbumAdapter(private val albumList: List<Album>) : RecyclerView.Adapter<AlbumAdapter.AlbumViewHolder>() {
 
@@ -33,17 +28,18 @@ class AlbumAdapter(private val albumList: List<Album>) : RecyclerView.Adapter<Al
 
     class AlbumViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         fun bind(album: Album) {
-            //show and add the information from table to the recycler view from sqlit
 
 
 
-            itemView.findViewById<TextView>(R.id.fotoName).text = album.photoName
-            itemView.findViewById<TextView>(R.id.albumName).text = album.imageURI
+            itemView.findViewById<TextView>(R.id.fotoName).text = "Nombre: " + album.photoName
+            itemView.findViewById<TextView>(R.id.albumName).text = "Album: " + album.albumName
             val imagev = itemView.findViewById<ImageView>(R.id.ivFoto)
 
-            Log.d("AlbumAdapter", "bind: ${album.imageURI}")
-            //Picasso.get().load(album.imageURI.toUri()).into(itemView.findViewById<ImageView>(R.id.ivFoto))
-            imagev.setImageURI(album.imageURI.toUri())
+            val imageUri = album.imageURI // Supongo que "imageURI" es el campo que contiene el URI de la imagen
+            // en
+            // la base de datos
+            val bitmap = BitmapFactory.decodeByteArray(album.imageURI, 0, album.imageURI.size)
+            imagev.setImageBitmap(bitmap)
 
 
         }

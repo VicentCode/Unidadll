@@ -91,7 +91,8 @@ class AlbumVisor : Fragment() {
                     Album(
                         cursor.getString(0),
                         cursor.getString(1),
-                        cursor.getString(2)
+                        cursor.getBlob(2)
+
                     )
                 )
             } while (cursor.moveToNext())

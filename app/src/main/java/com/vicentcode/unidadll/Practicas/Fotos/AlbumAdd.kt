@@ -11,6 +11,7 @@ import android.graphics.drawable.GradientDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -24,6 +25,8 @@ import com.squareup.picasso.Picasso
 import com.vicentcode.unidadll.Ejemplos.Ejemplo3SQL.AdminSQLite
 import com.vicentcode.unidadll.R
 import com.vicentcode.unidadll.databinding.FragmentAlbumAddBinding
+import java.io.ByteArrayOutputStream
+import java.io.IOException
 
 class AlbumAdd : Fragment() {
     private lateinit var v: FragmentAlbumAddBinding
@@ -58,9 +61,7 @@ class AlbumAdd : Fragment() {
             } while (cursor.moveToNext())
         }
 
-        if (dataList.isEmpty()) {
-            dataList.add("Agrege un nuevo album")
-        }
+
         bdconnector!!.close()
 
         class CustomSpinnerAdapter(context: Context, resource: Int, objects: List<String>) :
@@ -90,15 +91,35 @@ class AlbumAdd : Fragment() {
                     val datos = ContentValues()
                     datos.put("photoName", v.edFoto.text.toString())
                     datos.put("albumName", v.userTpyeAU.text.toString())
-                    datos.put("imageURI", imageUri.toString())
-                    // bdconnector!!.insert("albums", null, datos)
-
-                    val result = bdconnector!!.insert("albums", null, datos)
-                    if (result != -1L) {
-                        Toast.makeText(requireContext(), "Album guardado", Toast.LENGTH_SHORT).show()
-                    } else {
-                        Toast.makeText(requireContext(), "Error al guardar el álbum", Toast.LENGTH_SHORT).show()
+                    val imageBytes = imageUri?.let { uri ->
+                        try {
+                            val inputStream = requireContext().contentResolver.openInputStream(uri as Uri)
+                            val byteArrayOutputStream = ByteArrayOutputStream()
+                            val buffer = ByteArray(4096)
+                            var bytesRead: Int
+                            while (inputStream!!.read(buffer).also { bytesRead = it } != -1) {
+                                byteArrayOutputStream.write(buffer, 0, bytesRead)
+                            }
+                            byteArrayOutputStream.toByteArray()
+                        } catch (e: IOException) {
+                            null
+                        }
                     }
+
+                    if (imageBytes != null) {
+                        datos.put("imageURI", imageBytes)
+                        Log.d("AlbumAdd", "onViewCreated: ${imageBytes}")
+
+                        val result = bdconnector!!.insert("albums", null, datos)
+                        if (result != -1L) {
+                            Toast.makeText(requireContext(), "Álbum guardado", Toast.LENGTH_SHORT).show()
+                        } else {
+                            Toast.makeText(requireContext(), "Error al guardar el álbum", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Toast.makeText(requireContext(), "Error al obtener la imagen", Toast.LENGTH_SHORT).show()
+                    }
+
                     bdconnector!!.close()
                 } else {
                     v.listItem.error = "Ingrese un nombre de album"
@@ -112,9 +133,11 @@ class AlbumAdd : Fragment() {
         }
 
         v.imageView3.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK)
+           val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             startActivityForResult(intent, 0)
+
+
         }
 
 
