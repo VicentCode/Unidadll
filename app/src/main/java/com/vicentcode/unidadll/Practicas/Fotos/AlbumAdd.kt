@@ -49,39 +49,25 @@ class AlbumAdd : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
         val editText = v.edAlbum
-
-
         adminSQLite = AlbumSQL(requireContext(), "fotitos", 2)
         bdconnector = adminSQLite!!.writableDatabase
+        dataList.clear()
         val cursor = bdconnector!!.rawQuery("SELECT DISTINCT albumName FROM albums", null)
+
         if (cursor.moveToFirst()) {
             do {
                 dataList.add(cursor.getString(0))
             } while (cursor.moveToNext())
         }
-
-
         bdconnector!!.close()
-
-        class CustomSpinnerAdapter(context: Context, resource: Int, objects: List<String>) :
-            ArrayAdapter<String>(context, resource, objects) {
-
-            override fun add(item: String?) {
-                super.add(item)
-                dataList.add(item!!)
-            }
-        }
-
-
         val autoComple: AutoCompleteTextView = v.userTpyeAU
         val adapters = ArrayAdapter(requireContext(), R.layout.list_item, dataList)
         autoComple.setAdapter(adapters)
 
 
-
         v.button4.setOnClickListener {
-
             if (imageUri != null) {
                 if (v.userTpyeAU.text.toString().isNotEmpty() && v.edFoto.text.toString().isNotEmpty()) {
 
@@ -133,11 +119,9 @@ class AlbumAdd : Fragment() {
         }
 
         v.imageView3.setOnClickListener {
-           val intent = Intent(Intent.ACTION_PICK)
+            val intent = Intent(Intent.ACTION_PICK)
             intent.type = "image/*"
             startActivityForResult(intent, 0)
-
-
         }
 
 
@@ -145,9 +129,9 @@ class AlbumAdd : Fragment() {
         v.fabSave.setOnClickListener {
             if (v.edAlbum.text!!.isNotEmpty()) {
                 val newItem = editText.text.toString()
-                if (newItem.isNotBlank()) {
-                    dataList.add(newItem)
-                    adapters.notifyDataSetChanged()
+                if (newItem.isNotEmpty()) {
+                    UpdateSpinner(dataList, true, newItem)
+
                     editText.text!!.clear()
                 }
             } else {
@@ -174,10 +158,49 @@ class AlbumAdd : Fragment() {
         }
     }
 
-
-
-
-
+    //when the fragment on resume clear and update the spinner
+    override fun onResume() {
+        super.onResume()
+        v.userTpyeAU.text!!.clear()
+        UpdateSpinner(dataList, false, "")
     }
+
+
+    fun UpdateSpinner(data: ArrayList<String>, addNewItem: Boolean, itemData: String): ArrayList<String> {
+        // add new item to bd and update spinner
+        if (addNewItem) {
+            adminSQLite = AlbumSQL(requireContext(), "fotitos", 2)
+            bdconnector = adminSQLite!!.writableDatabase
+            val datos = ContentValues()
+            datos.put("albumName", itemData)
+            val result = bdconnector!!.insert("albums", null, datos)
+            if (result != -1L) {
+                Toast.makeText(requireContext(), "Álbum guardado", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "Error al guardar el álbum", Toast.LENGTH_SHORT).show()
+            }
+            bdconnector!!.close()
+        }
+
+        adminSQLite = AlbumSQL(requireContext(), "fotitos", 2)
+        bdconnector = adminSQLite!!.writableDatabase
+        data.clear()
+        val cursor = bdconnector!!.rawQuery("SELECT DISTINCT albumName FROM albums", null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                data.add(cursor.getString(0))
+            } while (cursor.moveToNext())
+        }
+        bdconnector!!.close()
+        val autoComple: AutoCompleteTextView = v.userTpyeAU
+        val adapters = ArrayAdapter(requireContext(), R.layout.list_item, data)
+        autoComple.setAdapter(adapters)
+
+        return data
+    }
+
+
+}
 
 

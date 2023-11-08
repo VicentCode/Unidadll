@@ -8,7 +8,7 @@
 
     <ImageView
             android:layout_width="0dp"
-            android:layout_height="0dp" android:src="@drawable/ic_launcher_background" android:id="@+id/imageView3"
+            android:layout_height="0dp" android:src="@drawable/addimages" android:id="@+id/imageView3"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent"
             android:layout_marginTop="8dp" app:layout_constraintBottom_toTopOf="@+id/guideline7"
@@ -49,7 +49,7 @@
             android:id="@+id/edFoto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre de la cancion" />
+            android:hint="Nombre de la foto" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
